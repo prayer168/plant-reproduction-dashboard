@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>植物有哪些繁殖方式</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', 'Microsoft JhengHei', sans-serif;
+    background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 50%, #e0f2f1 100%);
+    min-height: 100vh;
+    color: #2d5016;
+  }
+
+  header {
+    background: linear-gradient(135deg, #2e7d32, #388e3c, #43a047);
+    color: white;
+    text-align: center;
+    padding: 32px 20px 24px;
+    box-shadow: 0 4px 20px rgba(46,125,50,0.4);
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '🌿';
+    position: absolute; font-size: 120px; opacity: 0.08;
+    left: -20px; top: -20px;
+  }
+  header::after {
+    content: '🌱';
+    position: absolute; font-size: 100px; opacity: 0.08;
+    right: -10px; bottom: -20px;
+  }
+  header h1 { font-size: 2.4rem; letter-spacing: 2px; margin-bottom: 8px; }
+  header p { font-size: 1.1rem; opacity: 0.9; }
+
+  /* ── Overview strip ── */
+  .overview {
+    display: flex; flex-wrap: wrap; gap: 16px;
+    justify-content: center;
+    padding: 28px 20px 10px;
+    max-width: 1200px; margin: 0 auto;
+  }
+  .stat-card {
+    background: white; border-radius: 16px;
+    padding: 20px 28px; text-align: center;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    min-width: 140px; flex: 1 1 140px; max-width: 200px;
+    border-top: 4px solid;
+    transition: transform .2s;
+  }
+  .stat-card:hover { transform: translateY(-4px); }
+  .stat-card .icon { font-size: 2rem; margin-bottom: 6px; }
+  .stat-card .num { font-size: 2rem; font-weight: 700; }
+  .stat-card .label { font-size: 0.85rem; color: #666; margin-top: 2px; }
+  .stat-card:nth-child(1) { border-color: #4caf50; }
+  .stat-card:nth-child(2) { border-color: #2196f3; }
+  .stat-card:nth-child(3) { border-color: #ff9800; }
+  .stat-card:nth-child(4) { border-color: #9c27b0; }
+
+  /* ── Filter tabs ── */
+  .filter-bar {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    justify-content: center;
+    padding: 24px 20px 8px;
+  }
+  .filter-btn {
+    padding: 8px 22px; border-radius: 50px;
+    border: 2px solid #a5d6a7; background: white;
+    font-size: 0.95rem; cursor: pointer; color: #388e3c;
+    font-weight: 600; transition: all .2s;
+  }
+  .filter-btn:hover, .filter-btn.active {
+    background: #388e3c; color: white; border-color: #388e3c;
+  }
+
+  /* ── Cards grid ── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px; padding: 20px 24px 40px;
+    max-width: 1300px; margin: 0 auto;
+  }
+
+  .card {
+    background: white; border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.09);
+    transition: transform .25s, box-shadow .25s;
+    cursor: pointer;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 36px rgba(0,0,0,0.15);
+  }
+  .card-header {
+    padding: 22px 22px 16px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .card-icon { font-size: 2.6rem; }
+  .card-header-text h2 { font-size: 1.2rem; color: #1b5e20; }
+  .card-header-text .en { font-size: 0.8rem; color: #888; }
+  .card-type-badge {
+    display: inline-block;
+    font-size: 0.72rem; padding: 2px 10px;
+    border-radius: 50px; font-weight: 700;
+    margin-top: 5px;
+  }
+  .card-body { padding: 0 22px 18px; }
+  .card-body p { font-size: 0.92rem; line-height: 1.7; color: #444; }
+
+  .examples-label { font-size: 0.8rem; font-weight: 700; color: #888; margin: 12px 0 6px; text-transform: uppercase; letter-spacing: 1px; }
+  .examples { display: flex; flex-wrap: wrap; gap: 6px; }
+  .example-tag {
+    font-size: 0.8rem; padding: 3px 10px;
+    border-radius: 50px; background: #f1f8e9;
+    border: 1px solid #c8e6c9; color: #2e7d32;
+  }
+
+  .card-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 22px;
+    background: #fafafa;
+    border-top: 1px solid #f0f0f0;
+    font-size: 0.82rem; color: #888;
+  }
+  .advantage { color: #388e3c; font-weight: 600; }
+
+  /* ── Modal ── */
+  .modal-bg {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.55); z-index: 1000;
+    align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .modal-bg.open { display: flex; }
+  .modal {
+    background: white; border-radius: 24px;
+    max-width: 600px; width: 100%;
+    max-height: 88vh; overflow-y: auto;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.25);
+    animation: popIn .25s ease;
+  }
+  @keyframes popIn {
+    from { transform: scale(0.85); opacity: 0; }
+    to   { transform: scale(1);    opacity: 1; }
+  }
+  .modal-header {
+    padding: 28px 28px 16px;
+    display: flex; align-items: flex-start; gap: 16px;
+  }
+  .modal-icon { font-size: 3.2rem; }
+  .modal-header h2 { font-size: 1.6rem; color: #1b5e20; margin-bottom: 4px; }
+  .modal-header .en { font-size: 0.95rem; color: #aaa; }
+  .modal-body { padding: 0 28px 28px; }
+  .modal-body h3 { font-size: 1rem; color: #388e3c; margin: 18px 0 8px; }
+  .modal-body p, .modal-body li { font-size: 0.95rem; line-height: 1.8; color: #444; }
+  .modal-body ul { padding-left: 20px; }
+  .modal-body .highlight-box {
+    background: #f1f8e9; border-left: 4px solid #4caf50;
+    border-radius: 8px; padding: 12px 16px; margin-top: 10px;
+    font-size: 0.92rem; color: #2d5016;
+  }
+  .close-btn {
+    position: absolute; top: 16px; right: 20px;
+    font-size: 1.6rem; background: none; border: none;
+    cursor: pointer; color: #aaa; line-height: 1;
+  }
+  .close-btn:hover { color: #555; }
+
+  /* ── Comparison table ── */
+  .compare-section {
+    max-width: 1100px; margin: 0 auto 48px;
+    padding: 0 24px;
+  }
+  .compare-section h2 {
+    text-align: center; font-size: 1.5rem;
+    color: #2e7d32; margin-bottom: 20px;
+  }
+  .table-wrap { overflow-x: auto; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+  table { width: 100%; border-collapse: collapse; background: white; }
+  thead tr { background: linear-gradient(135deg, #2e7d32, #43a047); color: white; }
+  th { padding: 14px 16px; text-align: left; font-size: 0.9rem; }
+  td { padding: 12px 16px; font-size: 0.88rem; color: #444; border-bottom: 1px solid #f0f0f0; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #f9fbe7; }
+  .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+  /* color themes */
+  .sexual    { --c: #4caf50; }
+  .asexual   { --c: #2196f3; }
+  .vegetative{ --c: #ff9800; }
+  .artificial{ --c: #9c27b0; }
+
+  .badge-sexual     { background: #e8f5e9; color: #2e7d32; }
+  .badge-asexual    { background: #e3f2fd; color: #1565c0; }
+  .badge-vegetative { background: #fff3e0; color: #e65100; }
+  .badge-artificial { background: #f3e5f5; color: #6a1b9a; }
+
+  footer {
+    text-align: center; padding: 24px;
+    font-size: 0.85rem; color: #888;
+    border-top: 1px solid #e0e0e0; background: white;
+  }
+
+  /* ── Mind map ── */
+  .mindmap-section {
+    max-width: 900px; margin: 0 auto 40px;
+    padding: 0 24px;
+  }
+  .mindmap-section h2 {
+    text-align: center; font-size: 1.5rem;
+    color: #2e7d32; margin-bottom: 20px;
+  }
+  .mindmap-wrap {
+    background: white; border-radius: 20px;
+    padding: 32px 20px; overflow-x: auto;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+  .tree { display: flex; justify-content: center; }
+  .tree ul { list-style: none; padding: 0; margin: 0; }
+  .tree li {
+    position: relative; padding: 6px 0 6px 26px;
+    display: flex; flex-direction: column; align-items: flex-start;
+  }
+  .tree > ul > li { padding-left: 0; }
+  .tree li::before {
+    content: ''; position: absolute; left: 0; top: 20px;
+    width: 18px; height: 2px; background: #a5d6a7;
+  }
+  .tree > ul > li::before { display: none; }
+  .tree li::after {
+    content: ''; position: absolute; left: 0; top: 0;
+    bottom: 50%; width: 2px; background: #a5d6a7;
+  }
+  .tree li:last-child::after { display: none; }
+  .tree ul ul { padding-left: 20px; }
+  .node {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 16px; border-radius: 50px;
+    font-size: 0.9rem; font-weight: 600; white-space: nowrap;
+    border: 2px solid; margin-bottom: 2px;
+  }
+  .node.root   { background:#2e7d32; color:white; border-color:#1b5e20; font-size:1.1rem; padding: 10px 24px; }
+  .node.branch1{ background:#e8f5e9; color:#1b5e20; border-color:#4caf50; }
+  .node.branch2{ background:#e3f2fd; color:#1565c0; border-color:#2196f3; }
+  .node.branch3{ background:#fff3e0; color:#e65100; border-color:#ff9800; }
+  .node.branch4{ background:#f3e5f5; color:#6a1b9a; border-color:#9c27b0; }
+  .node.leaf   { background:#fafafa; color:#555; border-color:#e0e0e0; font-weight:400; font-size:0.82rem; }
+
+  /* ── Quiz ── */
+  .quiz-section {
+    max-width: 860px; margin: 0 auto 48px;
+    padding: 0 24px;
+  }
+  .quiz-section h2 {
+    text-align: center; font-size: 1.5rem;
+    color: #2e7d32; margin-bottom: 8px;
+  }
+  .quiz-section .sub { text-align:center; color:#888; font-size:0.9rem; margin-bottom: 24px; }
+  .quiz-box {
+    background: white; border-radius: 20px;
+    padding: 28px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+  .quiz-progress {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 24px;
+  }
+  .progress-bar-wrap {
+    flex: 1; height: 8px; background: #e8f5e9;
+    border-radius: 50px; overflow: hidden;
+  }
+  .progress-bar { height: 100%; background: #4caf50; border-radius: 50px; transition: width .4s; }
+  .progress-text { font-size: 0.85rem; color: #888; white-space: nowrap; }
+  .quiz-q { font-size: 1.1rem; font-weight: 700; color: #1b5e20; margin-bottom: 20px; line-height: 1.6; }
+  .quiz-q .q-icon { font-size: 1.4rem; margin-right: 6px; }
+  .options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  @media (max-width: 520px) { .options { grid-template-columns: 1fr; } }
+  .option-btn {
+    padding: 12px 16px; border-radius: 12px;
+    border: 2px solid #c8e6c9; background: #f9fbe7;
+    font-size: 0.92rem; cursor: pointer; text-align: left;
+    color: #333; transition: all .2s; line-height: 1.4;
+  }
+  .option-btn:hover:not(:disabled) { border-color: #4caf50; background: #e8f5e9; }
+  .option-btn.correct { background: #e8f5e9; border-color: #4caf50; color: #1b5e20; font-weight: 700; }
+  .option-btn.wrong   { background: #fce4ec; border-color: #e91e63; color: #880e4f; }
+  .option-btn:disabled { cursor: default; }
+  .quiz-feedback {
+    margin-top: 16px; padding: 14px 16px;
+    border-radius: 12px; font-size: 0.92rem; line-height: 1.6;
+    display: none;
+  }
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.ok { background: #e8f5e9; color: #1b5e20; border-left: 4px solid #4caf50; }
+  .quiz-feedback.fail { background: #fce4ec; color: #880e4f; border-left: 4px solid #e91e63; }
+  .quiz-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; }
+  .quiz-next-btn {
+    padding: 10px 28px; border-radius: 50px;
+    background: #388e3c; color: white; border: none;
+    font-size: 1rem; cursor: pointer; font-weight: 600;
+    transition: background .2s; display: none;
+  }
+  .quiz-next-btn:hover { background: #2e7d32; }
+  .quiz-score-box {
+    display: none; text-align: center; padding: 32px 20px;
+  }
+  .quiz-score-box .big-score { font-size: 3.5rem; font-weight: 900; color: #2e7d32; }
+  .quiz-score-box .score-msg { font-size: 1.1rem; color: #555; margin: 8px 0 20px; }
+  .quiz-restart-btn {
+    padding: 12px 36px; border-radius: 50px;
+    background: #388e3c; color: white; border: none;
+    font-size: 1rem; cursor: pointer; font-weight: 600;
+  }
+
+  @media (max-width: 600px) {
+    header h1 { font-size: 1.7rem; }
+    .grid { grid-template-columns: 1fr; padding: 12px 16px 32px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🌱 植物有哪些繁殖方式？</h1>
+  <p>探索植物如何傳宗接代——從種子到無性分株，一次看懂</p>
+</header>
+
+<!-- Overview stats -->
+<div class="overview">
+  <div class="stat-card">
+    <div class="icon">🌸</div>
+    <div class="num" style="color:#4caf50">2</div>
+    <div class="label">有性繁殖方法</div>
+  </div>
+  <div class="stat-card">
+    <div class="icon">🍀</div>
+    <div class="num" style="color:#2196f3">4</div>
+    <div class="label">無性繁殖方法</div>
+  </div>
+  <div class="stat-card">
+    <div class="icon">🧑‍🌾</div>
+    <div class="num" style="color:#ff9800">3</div>
+    <div class="label">人工繁殖技術</div>
+  </div>
+  <div class="stat-card">
+    <div class="icon">🌍</div>
+    <div class="num" style="color:#9c27b0">9</div>
+    <div class="label">繁殖方式總計</div>
+  </div>
+</div>
+
+<!-- Filter -->
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="filterCards('all')">全部</button>
+  <button class="filter-btn" onclick="filterCards('sexual')">有性繁殖</button>
+  <button class="filter-btn" onclick="filterCards('asexual')">無性繁殖</button>
+  <button class="filter-btn" onclick="filterCards('vegetative')">營養繁殖</button>
+  <button class="filter-btn" onclick="filterCards('artificial')">人工繁殖</button>
+</div>
+
+<!-- Cards -->
+<div class="grid" id="cardGrid">
+
+  <!-- 1. 種子繁殖 -->
+  <div class="card sexual" onclick="openModal('seed')" data-type="sexual">
+    <div class="card-header" style="background:linear-gradient(135deg,#e8f5e9,#f9fbe7)">
+      <div class="card-icon">🌰</div>
+      <div class="card-header-text">
+        <h2>種子繁殖</h2>
+        <div class="en">Seed Reproduction</div>
+        <span class="card-type-badge badge-sexual">有性繁殖</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>透過花粉與卵細胞結合，形成種子，再由種子萌發成新植株。是植物最常見的繁殖方式。</p>
+      <div class="examples-label">代表植物</div>
+      <div class="examples">
+        <span class="example-tag">玫瑰</span>
+        <span class="example-tag">向日葵</span>
+        <span class="example-tag">番茄</span>
+        <span class="example-tag">豆類</span>
+        <span class="example-tag">稻米</span>
+      </div>
+    </div>
+    <div class="card-footer">
+      <span class="advantage">✓ 基因多樣性高</span>
+      <span>點擊查看詳情 →</span>
+    </div>
+  </div>
+
+  <!-- 2. 孢子繁殖 -->
+  <div class="card sexual" onclick="openModal('spore')" data-type="sexual">
+    <div class="card-header" style="background:linear-gradient(135deg,#e8f5e9,#e0f2f1)">
+      <div class="card-icon">🍄</div>
+      <div class="card-header-text">
+        <h2>孢子繁殖</h2>
+        <div class="en">Spore Reproduction</div>
+        <span class="card-type-badge badge-sexual">有性繁殖</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>不需開花，由孢子體產生大量孢子，孢子散落後萌發，是蕨類、苔蘚的主要繁殖方式。</p>
+      <div class="examples-label">代表植物</div>
+      <div class="examples">
+        <span class="example-tag">腎蕨</span>
+        <span class="example-tag">木賊</span>
+        <span class="example-tag">地錢</span>
+        <span class="example-tag">水龍骨</span>
+      </div>
+    </div>
+    <div class="card-footer">
+      <span class="advantage">✓ 數量龐大、散播遠</span>
+      <span>點擊查看詳情 →</span>
+    </div>
+  </div>
+
+  <!-- 3. 地下莖繁殖 -->
+  <div class="card vegetative" onclick="openModal('rhizome')" data-type="vegetative">
+    <div class="card-header" style="background:linear-gradient(135deg,#fff3e0,#fffde7)">
+      <div class="card-icon">🥔</div>
+      <div class="card-header-text">
+        <h2>地下莖繁殖</h2>
+        <div class="en">Rhizome / Tuber</div>
+        <span class="card-type-badge badge-vegetative">營養繁殖</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>植物以地下莖（根莖、塊莖、球莖、鱗莖）儲存養分，並長出新芽，形成新個體。</p>
+      <div class="examples-label">代表植物</div>
+      <div class="examples">
+        <span class="example-tag">馬鈴薯（塊莖）</span>
+        <span class="example-tag">薑（根莖）</span>
+        <span class="example-tag">洋蔥（鱗莖）</span>
+        <span class="example-tag">慈姑（球莖）</span>
+      </div>
+    </div>
+    <div class="card-footer">
+      <span class="advantage">✓ 快速、養分充足</span>
+      <span>點擊查看詳情 →</span>
+    </div>
+  </div>
+
+  <!-- 4. 走莖／匍匐莖 -->
+  <div class="card vegetative" onclick="openModal('runner')" data-type="vegetative">
+    <div class="card-header" style="background:linear-gradient(135deg,#fff8e1,#f9fbe7)">
+      <div class="card-icon">🍓</div>
+      <div class="card-header-text">
+        <h2>走莖繁殖</h2>
+        <div class="en">Stolon / Runner</div>
+        <span class="card-type-badge badge-vegetative">營養繁殖</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>母株延伸出水平走莖，在節點處長出新的不定根與芽體，形成子株，再與母株切離。</p>
+      <div class="examples-label">代表植物</div>
+      <div class="examples">
+        <span class="example-tag">草莓</span>
+        <span class="example-tag">吊蘭</span>
+        <span class="example-tag">薄荷</span>
+        <span class="example-tag">虎耳草</span>
+      </div>
+    </div>
+    <div class="card-footer">
+      <span class="advantage">✓ 自然蔓延、易操作</span>
+      <span>點擊查看詳情 →</span>
+    </div>
+  </div>
+
+  <!-- 5. 葉芽繁殖 -->
+  <div class="card vegetative" onclick="openModal('leaf')" data-type="vegetative">
+    <div class="card-header" style="background:linear-gradient(135deg,#f3e5f5,#fce4ec)">
+      <div class="card-icon">🍃</div>
+      <div class="card-header-text">
+        <h2>葉芽繁殖</h2>
+        <div class="en">Leaf Propagation</div>
+        <span class="card-type-badge badge-vegetative">營養繁殖</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>落地生根等植物的葉緣或葉片上直接長出小芽與小根，落地後即可發育成新植株。</p>
+      <div class="examples-label">代表植物</div>
+      <div class="examples">
+        <span class="example-tag">落地生根</span>
+        <span class="example-tag">玉米石</span>
+        <span class="example-tag">非洲菫</span>
+        <span class="example-tag">石蓮花</span>
+      </div>
+    </div>
+    <div class="card-footer">
+      <span class="advantage">✓ 不需根莖、易繁殖</span>
+      <span>點擊查看詳情 →</span>
+    </div>
+  </div>
+
+  <!-- 6. 分株繁殖 -->
+  <div class="card asexual" onclick="openModal('division')" data-type="asexual">
+    <div class="card-header" style="background:linear-gradient(135deg,#e3f2fd,#e8eaf6)">
+      <div class="card-icon">✂️</div>
+      <div class="card-header-text">
+        <h2>分株繁殖</h2>
+        <div class="en">Division</div>
+        <span class="card-type-badge badge-asexual">無性繁殖</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>將母株分割為帶根帶芽的數個小株，各自獨立種植，每株皆能長成完整植物。</p>
+      <div class="examples-label">代表植物</div>
+      <div class="examples">
+        <span class="example-tag">文心蘭</span>
+        <span class="example-tag">虎尾蘭</span>
+        <span class="example-tag">白鶴芋</span>
+        <span class="example-tag">萬年青</span>
+      </div>
+    </div>
+    <div class="card-footer">
+      <span class="advantage">✓ 保留親代特性</span>
+      <span>點擊查看詳情 →</span>
+    </div>
+  </div>
+
+  <!-- 7. 扦插繁殖 -->
+  <div class="card artificial" onclick="openModal('cutting')" data-type="artificial">
+    <div class="card-header" style="background:linear-gradient(135deg,#f3e5f5,#ede7f6)">
+      <div class="card-icon">✂️🌿</div>
+      <div class="card-header-text">
+        <h2>扦插繁殖</h2>
+        <div class="en">Cutting</div>
+        <span class="card-type-badge badge-artificial">人工繁殖</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>截取莖、葉或根的一段，插入土壤或水中，讓其重新長出根系，成為獨立植株。</p>
+      <div class="examples-label">代表植物</div>
+      <div class="examples">
+        <span class="example-tag">玫瑰</span>
+        <span class="example-tag">九重葛</span>
+        <span class="example-tag">地瓜葉</span>
+        <span class="example-tag">木薯</span>
+      </div>
+    </div>
+    <div class="card-footer">
+      <span class="advantage">✓ 成本低、操作簡單</span>
+      <span>點擊查看詳情 →</span>
+    </div>
+  </div>
+
+  <!-- 8. 嫁接繁殖 -->
+  <div class="card artificial" onclick="openModal('graft')" data-type="artificial">
+    <div class="card-header" style="background:linear-gradient(135deg,#fce4ec,#fff3e0)">
+      <div class="card-icon">🔗</div>
+      <div class="card-header-text">
+        <h2>嫁接繁殖</h2>
+        <div class="en">Grafting</div>
+        <span class="card-type-badge badge-artificial">人工繁殖</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>將優良品種的芽或枝（接穗）接合到健壯砧木上，使二者癒合生長，兼具兩者優點。</p>
+      <div class="examples-label">代表植物</div>
+      <div class="examples">
+        <span class="example-tag">蘋果</span>
+        <span class="example-tag">梨</span>
+        <span class="example-tag">柑橘</span>
+        <span class="example-tag">西瓜（砧木）</span>
+      </div>
+    </div>
+    <div class="card-footer">
+      <span class="advantage">✓ 結合優良性狀</span>
+      <span>點擊查看詳情 →</span>
+    </div>
+  </div>
+
+  <!-- 9. 組織培養 -->
+  <div class="card artificial" onclick="openModal('tissue')" data-type="artificial">
+    <div class="card-header" style="background:linear-gradient(135deg,#e8eaf6,#e3f2fd)">
+      <div class="card-icon">🔬</div>
+      <div class="card-header-text">
+        <h2>組織培養</h2>
+        <div class="en">Tissue Culture</div>
+        <span class="card-type-badge badge-artificial">人工繁殖</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <p>在無菌環境中取植物的細胞或組織，放入含養分的培養基，大量快速繁殖出相同植株。</p>
+      <div class="examples-label">代表植物</div>
+      <div class="examples">
+        <span class="example-tag">蘭花</span>
+        <span class="example-tag">香蕉</span>
+        <span class="example-tag">草莓</span>
+        <span class="example-tag">馬鈴薯脫毒苗</span>
+      </div>
+    </div>
+    <div class="card-footer">
+      <span class="advantage">✓ 大量複製、無病毒</span>
+      <span>點擊查看詳情 →</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- Mind map -->
+<div class="mindmap-section">
+  <h2>🌳 繁殖方式分類樹狀圖</h2>
+  <div class="mindmap-wrap">
+    <div class="tree">
+      <ul>
+        <li>
+          <span class="node root">🌱 植物繁殖方式</span>
+          <ul>
+            <li>
+              <span class="node branch1">🌸 有性繁殖（需受精）</span>
+              <ul>
+                <li><span class="node leaf">🌰 種子繁殖 — 花粉＋卵細胞 → 種子萌發</span></li>
+                <li><span class="node leaf">🍄 孢子繁殖 — 孢子散落萌發（蕨類、苔蘚）</span></li>
+              </ul>
+            </li>
+            <li>
+              <span class="node branch2">🍀 無性繁殖（不需受精）</span>
+              <ul>
+                <li>
+                  <span class="node branch3">🌿 營養繁殖（利用植體）</span>
+                  <ul>
+                    <li><span class="node leaf">🥔 地下莖 — 根莖／塊莖／球莖／鱗莖</span></li>
+                    <li><span class="node leaf">🍓 走莖 — 匍匐莖末端長子株</span></li>
+                    <li><span class="node leaf">🍃 葉芽 — 葉緣長出不定芽</span></li>
+                    <li><span class="node leaf">✂️ 分株 — 分割帶根子株</span></li>
+                  </ul>
+                </li>
+                <li>
+                  <span class="node branch4">🧑‍🌾 人工繁殖（人為操作）</span>
+                  <ul>
+                    <li><span class="node leaf">✂️🌿 扦插 — 取莖葉插入介質生根</span></li>
+                    <li><span class="node leaf">🔗 嫁接 — 接穗＋砧木癒合共生</span></li>
+                    <li><span class="node leaf">🔬 組織培養 — 無菌環境細胞大量增殖</span></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Comparison table -->
+<div class="compare-section">
+  <h2>📊 繁殖方式比較表</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>繁殖方式</th>
+          <th>類型</th>
+          <th>需要種子</th>
+          <th>基因變化</th>
+          <th>繁殖速度</th>
+          <th>技術難度</th>
+          <th>典型應用</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>🌰 種子繁殖</td>
+          <td><span class="dot" style="background:#4caf50"></span>有性</td>
+          <td>✅ 是</td>
+          <td>有（基因重組）</td>
+          <td>中</td>
+          <td>⭐</td>
+          <td>農業育種</td>
+        </tr>
+        <tr>
+          <td>🍄 孢子繁殖</td>
+          <td><span class="dot" style="background:#4caf50"></span>有性</td>
+          <td>❌ 孢子</td>
+          <td>有</td>
+          <td>慢</td>
+          <td>⭐⭐</td>
+          <td>蕨類苔蘚</td>
+        </tr>
+        <tr>
+          <td>🥔 地下莖繁殖</td>
+          <td><span class="dot" style="background:#ff9800"></span>營養</td>
+          <td>❌ 否</td>
+          <td>無（複製）</td>
+          <td>快</td>
+          <td>⭐</td>
+          <td>薑、洋蔥</td>
+        </tr>
+        <tr>
+          <td>🍓 走莖繁殖</td>
+          <td><span class="dot" style="background:#ff9800"></span>營養</td>
+          <td>❌ 否</td>
+          <td>無（複製）</td>
+          <td>中</td>
+          <td>⭐</td>
+          <td>草莓、吊蘭</td>
+        </tr>
+        <tr>
+          <td>🍃 葉芽繁殖</td>
+          <td><span class="dot" style="background:#ff9800"></span>營養</td>
+          <td>❌ 否</td>
+          <td>無（複製）</td>
+          <td>中</td>
+          <td>⭐</td>
+          <td>多肉植物</td>
+        </tr>
+        <tr>
+          <td>✂️ 分株繁殖</td>
+          <td><span class="dot" style="background:#2196f3"></span>無性</td>
+          <td>❌ 否</td>
+          <td>無（複製）</td>
+          <td>中</td>
+          <td>⭐</td>
+          <td>蘭花、觀葉</td>
+        </tr>
+        <tr>
+          <td>✂️🌿 扦插繁殖</td>
+          <td><span class="dot" style="background:#9c27b0"></span>人工</td>
+          <td>❌ 否</td>
+          <td>無（複製）</td>
+          <td>快</td>
+          <td>⭐⭐</td>
+          <td>玫瑰、木本</td>
+        </tr>
+        <tr>
+          <td>🔗 嫁接繁殖</td>
+          <td><span class="dot" style="background:#9c27b0"></span>人工</td>
+          <td>❌ 否</td>
+          <td>無（性狀結合）</td>
+          <td>中</td>
+          <td>⭐⭐⭐</td>
+          <td>果樹育種</td>
+        </tr>
+        <tr>
+          <td>🔬 組織培養</td>
+          <td><span class="dot" style="background:#9c27b0"></span>人工</td>
+          <td>❌ 否</td>
+          <td>無（複製）</td>
+          <td>極快</td>
+          <td>⭐⭐⭐⭐⭐</td>
+          <td>蘭花量產</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal-bg" id="modalBg" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <div style="position:relative">
+      <button class="close-btn" onclick="document.getElementById('modalBg').classList.remove('open')">✕</button>
+    </div>
+    <div class="modal-header" id="modalHeader"></div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<!-- Quiz section -->
+<div class="quiz-section">
+  <h2>🧠 即時小測驗</h2>
+  <p class="sub">共 8 題，測驗你對植物繁殖方式的理解！</p>
+  <div class="quiz-box">
+    <div id="quizMain">
+      <div class="quiz-progress">
+        <div class="progress-bar-wrap"><div class="progress-bar" id="progressBar" style="width:0%"></div></div>
+        <span class="progress-text" id="progressText">0 / 8</span>
+      </div>
+      <div class="quiz-q" id="quizQ"></div>
+      <div class="options" id="quizOptions"></div>
+      <div class="quiz-feedback" id="quizFeedback"></div>
+      <div class="quiz-nav">
+        <span id="quizScoreLabel" style="color:#888;font-size:0.9rem"></span>
+        <button class="quiz-next-btn" id="nextBtn" onclick="nextQuestion()">下一題 →</button>
+      </div>
+    </div>
+    <div class="quiz-score-box" id="quizScoreBox">
+      <div class="big-score" id="finalScore"></div>
+      <div class="score-msg" id="scoreMsg"></div>
+      <button class="quiz-restart-btn" onclick="startQuiz()">再做一次 🔄</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  🌿 植物繁殖方式互動 Dashboard｜國小自然科學教材 | 2026
+</footer>
+
+<script>
+const modals = {
+  seed: {
+    icon: '🌰', title: '種子繁殖', en: 'Seed Reproduction',
+    sections: [
+      { h: '什麼是種子繁殖？', p: '種子繁殖屬於有性生殖，植物透過開花，雄蕊的花粉傳遞到雌蕊的柱頭上（授粉），再經過受精，形成種子。種子落在合適環境後萌發，長成新植株。' },
+      { h: '種子的結構', p: '種子通常包含：種皮（保護層）、子葉（儲存養分）、胚芽（未來的莖葉）、胚根（未來的根）。' },
+      { h: '種子如何傳播？', ul: ['風力傳播：蒲公英、楓樹（翅果）', '水流傳播：椰子', '動物傳播：果實被吃後排出種子', '彈射傳播：鳳仙花、豌豆'] },
+      { h: '優點', box: '✓ 基因多樣性高，後代適應能力強\n✓ 種子數量龐大，傳播範圍廣\n✓ 是農業最重要的繁殖方式' }
+    ]
+  },
+  spore: {
+    icon: '🍄', title: '孢子繁殖', en: 'Spore Reproduction',
+    sections: [
+      { h: '什麼是孢子繁殖？', p: '孢子是植物（或真菌）產生的單細胞生殖體，不需要受精就能萌發生長。蕨類植物的葉背有孢子囊，成熟後散出大量孢子。' },
+      { h: '蕨類繁殖的兩個世代', ul: ['孢子體世代：我們看到的蕨葉植株，產生孢子', '配子體世代：孢子萌發後形成的小型心形葉，再產生精子與卵細胞進行受精'] },
+      { h: '優點', box: '✓ 孢子數量極多，輕巧易隨風散播\n✓ 不需要昆蟲或動物幫助\n✓ 是蕨類、苔蘚最有效的繁殖策略' }
+    ]
+  },
+  rhizome: {
+    icon: '🥔', title: '地下莖繁殖', en: 'Rhizome / Tuber',
+    sections: [
+      { h: '什麼是地下莖繁殖？', p: '植物將養分儲存在地下的特化莖部，並在節點上長出新芽，發育成新的植株，屬於無性（營養）繁殖。' },
+      { h: '四種類型', ul: ['根莖（Rhizome）：水平生長，如薑、蓮藕', '塊莖（Tuber）：膨大儲養，如馬鈴薯', '球莖（Corm）：如慈姑、荸薺', '鱗莖（Bulb）：層狀鱗片，如洋蔥、蒜頭、百合'] },
+      { h: '優點', box: '✓ 養分充足，新株生長快速\n✓ 保留親代所有特性\n✓ 在冬季寒冷時可休眠存活' }
+    ]
+  },
+  runner: {
+    icon: '🍓', title: '走莖繁殖', en: 'Stolon / Runner',
+    sections: [
+      { h: '什麼是走莖繁殖？', p: '母株從基部長出水平蔓延的走莖（匍匐莖），在節點處形成不定根和新芽，長出子株後即可與母株分離，獨立生長。' },
+      { h: '生活中的例子', ul: ['草莓：夏季大量產生走莖繁殖', '吊蘭：懸吊的葉串末端長出子株', '薄荷：橫走莖在地表蔓延', '虎耳草：走莖懸空下垂'] },
+      { h: '優點', box: '✓ 自然繁殖，不需人工協助\n✓ 子株在分離前仍由母株提供養分\n✓ 適合地被植物快速覆蓋地面' }
+    ]
+  },
+  leaf: {
+    icon: '🍃', title: '葉芽繁殖', en: 'Leaf Propagation',
+    sections: [
+      { h: '什麼是葉芽繁殖？', p: '部分植物的葉片邊緣或表面能直接長出帶根小芽（不定芽），稱為「胎生葉」現象。這些小苗落地後即可獨立生存。' },
+      { h: '代表案例', ul: ['落地生根：葉緣有整排小芽，碰觸即掉落生根，因此得名', '非洲菫：用葉片扦插後，切面可長出新芽', '石蓮花、玉米石：葉片落地後可生根'] },
+      { h: '優點', box: '✓ 不需莖或根即可繁殖\n✓ 葉片數量多，繁殖潛力大\n✓ 多肉植物最常用的繁殖策略' }
+    ]
+  },
+  division: {
+    icon: '✂️', title: '分株繁殖', en: 'Division',
+    sections: [
+      { h: '什麼是分株繁殖？', p: '將一株植物從根部或基部分割成數個帶有根系與芽點的小株，分別移植，每一小株都能獨立長成完整植物。' },
+      { h: '操作步驟', ul: ['1. 將植株從盆中取出', '2. 輕輕去除多餘土壤', '3. 用刀或手分開各子株（確保每株有根有芽）', '4. 分別種入新容器，澆水養護'] },
+      { h: '優點', box: '✓ 完全保留親代基因與外觀特性\n✓ 操作簡單，成功率高\n✓ 同時達到分盆（避免擁擠）的目的' }
+    ]
+  },
+  cutting: {
+    icon: '✂️🌿', title: '扦插繁殖', en: 'Cutting',
+    sections: [
+      { h: '什麼是扦插繁殖？', p: '取植物的莖、葉或根的一段，去除下方葉片，插入濕潤的土壤、水或介質中，讓切面產生不定根，長成新植株。' },
+      { h: '三種扦插類型', ul: ['莖插（最常見）：取帶節的莖段', '葉插：用完整葉片插入土中', '根插：取根段埋入土中（較少見）'] },
+      { h: '促進生根的小技巧', ul: ['使用發根粉（吲哚丁酸）塗抹切口', '保持高濕度環境（蓋塑膠袋）', '避免直射強光，保持溫暖'] },
+      { h: '優點', box: '✓ 成本低、材料易取得\n✓ 保留親代特性（無性複製）\n✓ 是花農最廣泛使用的方法之一' }
+    ]
+  },
+  graft: {
+    icon: '🔗', title: '嫁接繁殖', en: 'Grafting',
+    sections: [
+      { h: '什麼是嫁接繁殖？', p: '嫁接是將優良品種的芽或枝（接穗）接合到另一植株（砧木）上，使兩者的形成層緊密貼合、癒合生長，共享養分輸送系統。' },
+      { h: '常見嫁接方法', ul: ['芽接：取單一芽片接到砧木上', '枝接：將帶有數芽的枝條接入砧木切口', '靠接：兩株植物仍有根，先接合再切離'] },
+      { h: '為什麼要嫁接？', ul: ['讓接穗獲得砧木的抗病根系', '讓砧木展現接穗的優良果實品質', '縮短果樹開花結果的年限'] },
+      { h: '優點', box: '✓ 結合砧木與接穗兩者的優良性狀\n✓ 提早開花結果\n✓ 可讓弱根品種在惡劣土壤存活' }
+    ]
+  },
+  tissue: {
+    icon: '🔬', title: '組織培養', en: 'Tissue Culture',
+    sections: [
+      { h: '什麼是組織培養？', p: '在完全無菌的環境下，從植物取出極小的細胞或組織（外植體），放入含有特定植物激素和養分的培養基中，大量快速增殖成相同基因的植株。' },
+      { h: '操作流程', ul: ['1. 取材：切取莖頂、葉片等外植體', '2. 滅菌：去除雜菌', '3. 誘導：在培養基中誘發愈傷組織', '4. 分化：添加不同激素使其長芽長根', '5. 馴化：移到溫室適應環境'] },
+      { h: '為什麼重要？', ul: ['蘭花：一年可複製數萬株', '香蕉：產生無病毒的均一種苗', '瀕危植物的保育與復育'] },
+      { h: '優點', box: '✓ 速度極快，可大量複製\n✓ 產出無病毒的健康植株\n✓ 全年可在室內進行，不受季節限制' }
+    ]
+  }
+};
+
+function openModal(id) {
+  const d = modals[id];
+  document.getElementById('modalHeader').innerHTML = `
+    <div class="modal-icon">${d.icon}</div>
+    <div>
+      <h2>${d.title}</h2>
+      <div class="en">${d.en}</div>
+    </div>`;
+  let body = '';
+  d.sections.forEach(s => {
+    body += `<h3>${s.h}</h3>`;
+    if (s.p) body += `<p>${s.p}</p>`;
+    if (s.ul) body += '<ul>' + s.ul.map(i => `<li>${i}</li>`).join('') + '</ul>';
+    if (s.box) body += `<div class="highlight-box">${s.box.replace(/\n/g, '<br>')}</div>`;
+  });
+  document.getElementById('modalBody').innerHTML = body;
+  document.getElementById('modalBg').classList.add('open');
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('modalBg')) {
+    document.getElementById('modalBg').classList.remove('open');
+  }
+}
+
+function filterCards(type) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.querySelectorAll('.card').forEach(c => {
+    if (type === 'all' || c.dataset.type === type) {
+      c.style.display = '';
+    } else {
+      c.style.display = 'none';
+    }
+  });
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') document.getElementById('modalBg').classList.remove('open');
+});
+
+// ── Quiz ──
+const quizData = [
+  {
+    q: '🌸 草莓會長出水平延伸的莖，在節點長出子株，這屬於哪種繁殖方式？',
+    opts: ['地下莖繁殖', '走莖繁殖', '葉芽繁殖', '組織培養'],
+    ans: 1,
+    exp: '草莓透過「走莖（匍匐莖）」繁殖，走莖水平延伸後在節點長出新株，是典型的營養繁殖。'
+  },
+  {
+    q: '🔬 蘭花工廠要在短時間內大量複製出相同品質的蘭花，最適合用哪種繁殖方式？',
+    opts: ['種子繁殖', '嫁接繁殖', '組織培養', '孢子繁殖'],
+    ans: 2,
+    exp: '組織培養可在無菌環境中大量快速複製植株，並確保品質一致，是蘭花量產的主要方式。'
+  },
+  {
+    q: '🥔 馬鈴薯埋在土裡，從塊莖的「芽眼」長出新株，這屬於哪種繁殖方式？',
+    opts: ['種子繁殖', '走莖繁殖', '地下莖繁殖', '扦插繁殖'],
+    ans: 2,
+    exp: '馬鈴薯的塊莖是特化的地下莖，芽眼萌發長出新植株，屬於地下莖（塊莖）繁殖。'
+  },
+  {
+    q: '🌰 下列哪一項是「有性繁殖」的特徵？',
+    opts: ['後代基因與親代完全相同', '不需要花粉', '後代具有基因多樣性', '速度比無性繁殖快'],
+    ans: 2,
+    exp: '有性繁殖需要雌雄配子結合，後代的基因來自兩親，因此具有基因多樣性，有助於物種適應環境。'
+  },
+  {
+    q: '🍄 蕨類植物葉背的褐色小點是什麼？它的功能是？',
+    opts: ['根毛，吸收水分', '孢子囊，產生孢子繁殖', '花蜜腺，吸引昆蟲', '氣孔，進行呼吸'],
+    ans: 1,
+    exp: '蕨類葉背的褐色小點是「孢子囊群」，內含大量孢子，成熟後散出進行繁殖。'
+  },
+  {
+    q: '🔗 果農將優良品種的枝條接到耐病砧木上，讓兩者癒合共生，這是哪種繁殖方式？',
+    opts: ['扦插繁殖', '嫁接繁殖', '分株繁殖', '走莖繁殖'],
+    ans: 1,
+    exp: '嫁接是將「接穗」（優良品種）接到「砧木」（耐病根系）上，兼具兩者優點，廣泛用於蘋果、梨、柑橘等果樹。'
+  },
+  {
+    q: '🍃 落地生根的葉緣會長出小芽苗，落地後即可存活，這是哪種繁殖方式？',
+    opts: ['種子繁殖', '葉芽繁殖', '分株繁殖', '孢子繁殖'],
+    ans: 1,
+    exp: '落地生根在葉緣直接長出帶根的不定芽，稱為「葉芽繁殖」，是多肉植物常見的無性繁殖方式。'
+  },
+  {
+    q: '🌿 下列哪一種繁殖方式，後代的基因與親代「完全相同」？',
+    opts: ['種子繁殖', '孢子繁殖（配子體期）', '扦插繁殖', '風媒授粉'],
+    ans: 2,
+    exp: '扦插屬於無性繁殖，新植株的 DNA 與親代完全相同，因此能保留品種的優良特性。'
+  }
+];
+
+let current = 0, score = 0, answered = false;
+
+function startQuiz() {
+  current = 0; score = 0; answered = false;
+  document.getElementById('quizMain').style.display = '';
+  document.getElementById('quizScoreBox').style.display = 'none';
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = quizData[current];
+  answered = false;
+  document.getElementById('progressBar').style.width = (current / quizData.length * 100) + '%';
+  document.getElementById('progressText').textContent = `${current} / ${quizData.length}`;
+  document.getElementById('quizScoreLabel').textContent = `得分：${score}`;
+  document.getElementById('quizQ').innerHTML = q.q;
+  document.getElementById('quizFeedback').className = 'quiz-feedback';
+  document.getElementById('quizFeedback').textContent = '';
+  document.getElementById('nextBtn').style.display = 'none';
+
+  const opts = document.getElementById('quizOptions');
+  opts.innerHTML = q.opts.map((o, i) =>
+    `<button class="option-btn" onclick="selectOption(${i})">${String.fromCharCode(65+i)}. ${o}</button>`
+  ).join('');
+}
+
+function selectOption(i) {
+  if (answered) return;
+  answered = true;
+  const q = quizData[current];
+  const btns = document.querySelectorAll('.option-btn');
+  btns.forEach(b => b.disabled = true);
+  btns[q.ans].classList.add('correct');
+  const fb = document.getElementById('quizFeedback');
+  if (i === q.ans) {
+    score++;
+    btns[i].classList.add('correct');
+    fb.className = 'quiz-feedback ok show';
+    fb.textContent = '✅ 答對了！' + q.exp;
+  } else {
+    btns[i].classList.add('wrong');
+    fb.className = 'quiz-feedback fail show';
+    fb.textContent = '❌ 答錯了。' + q.exp;
+  }
+  document.getElementById('quizScoreLabel').textContent = `得分：${score}`;
+  document.getElementById('nextBtn').style.display = '';
+  document.getElementById('nextBtn').textContent =
+    current + 1 < quizData.length ? '下一題 →' : '查看成績 🎉';
+}
+
+function nextQuestion() {
+  current++;
+  if (current < quizData.length) {
+    renderQuestion();
+  } else {
+    showScore();
+  }
+}
+
+function showScore() {
+  document.getElementById('quizMain').style.display = 'none';
+  const box = document.getElementById('quizScoreBox');
+  box.style.display = 'block';
+  document.getElementById('finalScore').textContent = `${score} / ${quizData.length}`;
+  const pct = score / quizData.length;
+  const msgs = [
+    [1,   '繼續加油！多看幾次卡片，你一定能進步 💪'],
+    [0.5, '還不錯！再複習幾個繁殖方式，下次一定滿分 🌱'],
+    [0.75,'很厲害！對植物繁殖已經相當了解了 🌿'],
+    [0.99,'完美！你是植物繁殖達人 🏆🌸']
+  ];
+  const msg = pct < 0.5 ? msgs[0][1] : pct < 0.75 ? msgs[1][1] : pct < 1 ? msgs[2][1] : msgs[3][1];
+  document.getElementById('scoreMsg').textContent = msg;
+}
+
+startQuiz();
+</script>
+</body>
+</html>
